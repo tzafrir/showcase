@@ -199,7 +199,7 @@
   </div>
   <div class="headWrap" id="hw2">
     <form method="GET">
-      <input type="text" size=40 name="u" />
+      <input type="text" size=40 name="u" placeholder="Numeric Google+ User Id" />
       <input type="submit" />
     </form>
   </div>
