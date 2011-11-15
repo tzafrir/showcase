@@ -17,7 +17,8 @@
   }
 
   #bigphoto {
-    box-shadow: 0 0 32px #005;
+    box-shadow: 0 0 64px #005;
+    border: 1px solid black;
     display: block;
   }
 </style>
@@ -65,14 +66,14 @@
   function getProfile(profile) {
     var header = $("#head1");
     header.text(profile.displayName);
-    addPhoto(profile.image.url);
+    addProfilePhoto(profile.image.url);
   }
 
   function isAside(object) {
     return !(object.content == '' || object.objectType != "note" || object.content.length > 140);
   }
 
-  function addPhoto(photoUrl) {
+  function addProfilePhoto(photoUrl) {
     $("#photoContainer").html('<img id="bigphoto" src="' + photoUrl + '&sz=256" />');
   }
 
