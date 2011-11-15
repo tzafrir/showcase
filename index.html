@@ -51,13 +51,9 @@
       }
 
       var obj = data.items[i].object;
-      if (obj.content == '' || obj.objectType != "note") {
-        continue;
+      if (isAside(obj)) {
+        addAside(obj.content);
       }
-      if (obj.content.length > 140) {
-        continue;
-      }
-      addAside(obj.content);
     }
   }
 
@@ -70,6 +66,10 @@
     var header = $("#head1");
     header.text(profile.displayName);
     addPhoto(profile.image.url);
+  }
+
+  function isAside(object) {
+    return !(object.content == '' || object.objectType != "note" || object.content.length > 140);
   }
 
   function addPhoto(photoUrl) {
