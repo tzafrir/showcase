@@ -8,6 +8,12 @@
     background-color: #ccc;
     display: block;
     box-shadow: 2px 2px 2px #334;
+    width: auto;
+    height: auto;
+  }
+
+  .container:hover {
+    background-color: #eee;
   }
 
   #sc0 {
@@ -16,10 +22,25 @@
     max-width: 45%;
   }
 
+  #sc1 {
+    display: block;
+    float: right;
+    max-width: 45%;
+  }
+
   #bigphoto {
     box-shadow: 0 0 64px #005;
     border: 1px solid black;
     display: block;
+  }
+
+  #photoPosts {
+    display: block;
+    float: right;
+  }
+
+  #photoPosts img {
+    float: right;
   }
 </style>
 <script src="https://www.google.com/jsapi?key=ABQIAAAAq9aptPa0BR2-BRTarx5CrBSKcS1aLn7EQ-cqq9PuGyFd-haD5hSwP6gKxkGJMELTP4D2BcurIdt15g" type="text/javascript"></script>
@@ -46,6 +67,8 @@
     var sc = $('#sc0');
     sc.text('');
     sc.append('<ul>');
+    var rc = $('#sc1');
+    rc.append('<div class="container" id="photoPosts"></div>');
     for (var i = 0; i < data.items.length; ++i) {
       if (data.items[i].verb != "post") {
         continue;
@@ -54,6 +77,8 @@
       var obj = data.items[i].object;
       if (isAside(obj)) {
         addAside(obj.content);
+      } else if (hasPhoto(obj)) {
+        addPhotoPost(obj);
       }
     }
   }
@@ -86,8 +111,25 @@
     return false;
   }
 
+  function addPhotoPost(object) {
+    var rc = $('#photoPosts');
+    rc.append('<img src="' + getPhotoLink(object) + '" /\>');
+  }
+
+  function getPhotoLink(object) {
+    if (!object.attachments) {
+      return '';
+    }
+    for (var i = 0; i < object.attachments.length; ++i) {
+      var att = object.attachments[i];
+      if (att.objectType == "photo") {
+        return att.image.url;
+      }
+    }  
+  }
+
   function addProfilePhoto(photoUrl) {
-    $("#photoContainer").html('<img id="bigphoto" src="' + photoUrl + '&sz=256" />');
+    $("#photoContainer").html('<img id="bigphoto" src="' + photoUrl + '&sz=256" /\>');
   }
 
   google.setOnLoadCallback(onLoad);
@@ -99,4 +141,5 @@
 </div>
 <div id="wrap">
   <div id="sc0">Loading...</div>
+  <div id="sc1"></div>
 </div>
