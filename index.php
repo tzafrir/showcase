@@ -36,6 +36,7 @@
   }
 
   #bigphoto {
+    clear: both;
     box-shadow: 0 0 64px #005;
     border: 1px solid black;
     display: block;
@@ -59,6 +60,20 @@
   .fatPost {
     font-family: 'Convergence', sans-serif;
     font-size: 1.2em;
+  }
+
+  #headWrap {
+    padding: 5px;
+    margin: 10px;
+    border: 1px solid black;
+    display: block;
+    float: left;
+    box-shadow: 0px 0px 20px #008;
+  }
+
+  #headWrap:hover {
+    color: #444;
+    text-decoration: underline;
   }
 </style>
 <script src="https://www.google.com/jsapi?key=ABQIAAAAq9aptPa0BR2-BRTarx5CrBSKcS1aLn7EQ-cqq9PuGyFd-haD5hSwP6gKxkGJMELTP4D2BcurIdt15g" type="text/javascript"></script>
@@ -178,7 +193,9 @@
 <link href='http://fonts.googleapis.com/css?family=Convergence' rel='stylesheet' type='text/css'>
 </head><body>
 <div id="header">
-  <h1 id="head1">Showcase+</h1>
+  <div id="headWrap">
+    <h1 id="head1">Showcase+</h1>
+  </div>
   <div align="center" id="photoContainer"></div>
 </div>
 <div id="wrap">
