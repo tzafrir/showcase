@@ -17,8 +17,22 @@
   function getData(data) {
     var sc = $('#sc0');
     sc.text('');
+    sc.append('<ul>');
     for (var i = 0; i < data.items.length; ++i) {
-      sc.append(data.items[i].title + '<br>');
+      if (data.items[i].verb != "post") {
+        continue;
+      }
+
+      var obj = data.items[i].object;
+      if (obj.content == '' || obj.objectType != "note") {
+        continue;
+      }
+      if (obj.content.length > 140) {
+        continue;
+      }
+      sc.append('<li>' + obj.content +
+        '<ul><li>' + obj.objectType + '</li></ul>' +
+      '</li>');
     }
   }
 
@@ -26,4 +40,6 @@
 </script>
 </head><body>
 <h1>Showcase+</h1>
-<div id="sc0">Loading...
+<div id="wrap">
+  <div id="sc0">Loading...</div>
+</div>
