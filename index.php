@@ -67,7 +67,7 @@
   google.load("jqueryui", "1.8.16");
 
   userId = "115470071077898720170";
-  key = "AIzaSyDWGHSeLL0NMLN-K5XvtEU58Vg56GanCT4";
+  key = "<?php echo ($_GET['u']) ? ($_GET['u']) : "AIzaSyDWGHSeLL0NMLN-K5XvtEU58Vg56GanCT4" ?>";
 
   function onLoad() {
     jQuery.getJSON('https://www.googleapis.com/plus/v1/people/' + userId + '/activities/public?' +
