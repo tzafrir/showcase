@@ -2,7 +2,7 @@
 <head>
 <title>Showcase+</title>
 <style>
-  .aside {
+  .container {
     margin: 10px;
     padding: 3px;
     background-color: #ccc;
@@ -51,7 +51,7 @@
 
   function addAside(aside) {
     var sc = $('#sc0');
-    sc.append('<div class="aside">' + aside + '</div>');  
+    sc.append('<div class="aside container">' + aside + '</div>');  
   }
 
   google.setOnLoadCallback(onLoad);
