@@ -28,6 +28,13 @@
     max-width: 45%;
   }
 
+  #sc2 {
+    display: block;
+    float: left;
+    clear: left;
+    max-width: 45%;
+  }
+
   #bigphoto {
     box-shadow: 0 0 64px #005;
     border: 1px solid black;
@@ -41,6 +48,17 @@
 
   #photoPosts img {
     float: right;
+    text-align: justify;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .fatPost {
+    font-family: 'Convergence', sans-serif;
+    font-size: 1.2em;
   }
 </style>
 <script src="https://www.google.com/jsapi?key=ABQIAAAAq9aptPa0BR2-BRTarx5CrBSKcS1aLn7EQ-cqq9PuGyFd-haD5hSwP6gKxkGJMELTP4D2BcurIdt15g" type="text/javascript"></script>
@@ -63,12 +81,16 @@
         getProfile);
   }
 
+  function setUp() {
+    $('#sc1').append('<div class="container" id="photoPosts"></div>');
+    $('#sc2').append('<div id="fatPosts"></div>');
+  }
+
   function getData(data) {
     var sc = $('#sc0');
     sc.text('');
     sc.append('<ul>');
-    var rc = $('#sc1');
-    rc.append('<div class="container" id="photoPosts"></div>');
+    setUp();
     for (var i = 0; i < data.items.length; ++i) {
       if (data.items[i].verb != "post") {
         continue;
@@ -76,16 +98,33 @@
 
       var obj = data.items[i].object;
       if (isAside(obj)) {
-        addAside(obj.content);
+        addAside(obj);
       } else if (hasPhoto(obj)) {
         addPhotoPost(obj);
+        addFatPost(obj);
+      } else {
+        addFatPost(obj);
       }
     }
   }
 
+  function isEmpty(object) {
+    return object.content == '';
+  }
+
   function addAside(aside) {
     var sc = $('#sc0');
-    sc.append('<div class="aside container">' + aside + '</div>');  
+    sc.append('<div class="aside container">' + '<a target="_blank" href="' + aside.url + '">' +
+      aside.content + '</a></div>');
+  }
+
+  function addFatPost(object) {
+    if (object.content == '') {
+      return;
+    }
+    var sc = $('#fatPosts');
+    sc.append('<div class="fatPost container">' + '<a target="_blank" href="' + object.url + '">' +
+      object.content + '</a></div>');
   }
 
   function getProfile(profile) {
@@ -95,7 +134,7 @@
   }
 
   function isAside(object) {
-    return !(object.content == '' || object.objectType != "note" || object.content.length > 140) &&
+    return !(isEmpty(object) || object.objectType != "note" || object.content.length > 140) &&
         !hasPhoto(object);
   }
 
@@ -113,7 +152,9 @@
 
   function addPhotoPost(object) {
     var rc = $('#photoPosts');
-    rc.append('<img src="' + getPhotoLink(object) + '" /\>');
+    rc.append('<a target="_blank" href="' + object.url + '">' +
+      '<img src="' + getPhotoLink(object) + '" /\>' +
+    '</a>');
   }
 
   function getPhotoLink(object) {
@@ -134,6 +175,7 @@
 
   google.setOnLoadCallback(onLoad);
 </script>
+<link href='http://fonts.googleapis.com/css?family=Convergence' rel='stylesheet' type='text/css'>
 </head><body>
 <div id="header">
   <h1 id="head1">Showcase+</h1>
@@ -142,4 +184,5 @@
 <div id="wrap">
   <div id="sc0">Loading...</div>
   <div id="sc1"></div>
+  <div id="sc2"></div>
 </div>
