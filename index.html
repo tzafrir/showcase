@@ -22,13 +22,18 @@
   google.load("jqueryui", "1.8.16");
 
   userId = "115470071077898720170";
+  key = "AIzaSyDWGHSeLL0NMLN-K5XvtEU58Vg56GanCT4";
 
   function onLoad() {
     jQuery.getJSON('https://www.googleapis.com/plus/v1/people/' + userId + '/activities/public?' +
-        'key=AIzaSyDWGHSeLL0NMLN-K5XvtEU58Vg56GanCT4' +
+        'key=' + key +
         '&maxResults=100' +
         '&callback=?',
         getData);
+    jQuery.getJSON('https://www.googleapis.com/plus/v1/people/' + userId + '?' +
+        'key=' + key +
+        '&callback=?',
+        getProfile);
   }
 
   function getData(data) {
@@ -56,10 +61,15 @@
     sc.append('<div class="aside container">' + aside + '</div>');  
   }
 
+  function getProfile(profile) {
+    var header = $("#header");
+    header.text(profile.displayName);
+  }
+
   google.setOnLoadCallback(onLoad);
 </script>
 </head><body>
-<h1>Showcase+</h1>
+<h1 id="header">Showcase+</h1>
 <div id="wrap">
   <div id="sc0">Loading...</div>
 </div>
