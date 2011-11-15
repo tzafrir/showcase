@@ -21,8 +21,10 @@
   google.load("jquery", "1.7.0");
   google.load("jqueryui", "1.8.16");
 
+  userId = "115470071077898720170";
+
   function onLoad() {
-    jQuery.getJSON('https://www.googleapis.com/plus/v1/people/115470071077898720170/activities/public?' +
+    jQuery.getJSON('https://www.googleapis.com/plus/v1/people/' + userId + '/activities/public?' +
         'key=AIzaSyDWGHSeLL0NMLN-K5XvtEU58Vg56GanCT4' +
         '&maxResults=100' +
         '&callback=?',
