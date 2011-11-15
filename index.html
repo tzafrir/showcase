@@ -15,6 +15,11 @@
     float: left;
     max-width: 45%;
   }
+
+  #bigphoto {
+    box-shadow: 0 0 32px #005;
+    display: block;
+  }
 </style>
 <script src="https://www.google.com/jsapi?key=ABQIAAAAq9aptPa0BR2-BRTarx5CrBSKcS1aLn7EQ-cqq9PuGyFd-haD5hSwP6gKxkGJMELTP4D2BcurIdt15g" type="text/javascript"></script>
 <script>
@@ -62,14 +67,22 @@
   }
 
   function getProfile(profile) {
-    var header = $("#header");
+    var header = $("#head1");
     header.text(profile.displayName);
+    addPhoto(profile.image.url);
+  }
+
+  function addPhoto(photoUrl) {
+    $("#photoContainer").html('<img id="bigphoto" src="' + photoUrl + '&sz=256" />');
   }
 
   google.setOnLoadCallback(onLoad);
 </script>
 </head><body>
-<h1 id="header">Showcase+</h1>
+<div id="header">
+  <h1 id="head1">Showcase+</h1>
+  <div align="center" id="photoContainer"></div>
+</div>
 <div id="wrap">
   <div id="sc0">Loading...</div>
 </div>
