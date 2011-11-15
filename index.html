@@ -1,6 +1,21 @@
 <!doctype html>
 <head>
 <title>Showcase+</title>
+<style>
+  .aside {
+    margin: 10px;
+    padding: 3px;
+    background-color: #ccc;
+    display: block;
+    box-shadow: 2px 2px 2px #334;
+  }
+
+  #sc0 {
+    display: block;
+    float: left;
+    max-width: 45%;
+  }
+</style>
 <script src="https://www.google.com/jsapi?key=ABQIAAAAq9aptPa0BR2-BRTarx5CrBSKcS1aLn7EQ-cqq9PuGyFd-haD5hSwP6gKxkGJMELTP4D2BcurIdt15g" type="text/javascript"></script>
 <script>
   google.load("jquery", "1.7.0");
@@ -30,10 +45,13 @@
       if (obj.content.length > 140) {
         continue;
       }
-      sc.append('<li>' + obj.content +
-        '<ul><li>' + obj.objectType + '</li></ul>' +
-      '</li>');
+      addAside(obj.content);
     }
+  }
+
+  function addAside(aside) {
+    var sc = $('#sc0');
+    sc.append('<div class="aside">' + aside + '</div>');  
   }
 
   google.setOnLoadCallback(onLoad);
