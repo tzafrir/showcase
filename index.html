@@ -1,0 +1,29 @@
+<doctype html>
+<head>
+<title>Showcase+</title>
+<script src="https://www.google.com/jsapi?key=ABQIAAAAq9aptPa0BR2-BRTarx5CrBSKcS1aLn7EQ-cqq9PuGyFd-haD5hSwP6gKxkGJMELTP4D2BcurIdt15g" type="text/javascript"></script>
+<script>
+  google.load("jquery", "1.7.0");
+  google.load("jqueryui", "1.8.16");
+
+  function onLoad() {
+    jQuery.getJSON('https://www.googleapis.com/plus/v1/people/115470071077898720170/activities/public?' +
+        'key=AIzaSyDWGHSeLL0NMLN-K5XvtEU58Vg56GanCT4' +
+        '&maxResults=100' +
+        '&callback=?',
+        getData);
+  }
+
+  function getData(data) {
+    var sc = $('#sc0');
+    sc.text('');
+    for (var i = 0; i < data.items.length; ++i) {
+      sc.append(data.items[i].title + '<br>');
+    }
+  }
+
+  google.setOnLoadCallback(onLoad);
+</script>
+</head><body>
+<h1>Showcase+</h1>
+<div id="sc0">Loading...
