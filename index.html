@@ -70,7 +70,20 @@
   }
 
   function isAside(object) {
-    return !(object.content == '' || object.objectType != "note" || object.content.length > 140);
+    return !(object.content == '' || object.objectType != "note" || object.content.length > 140) &&
+        !hasPhoto(object);
+  }
+
+  function hasPhoto(object) {
+    if (!object.attachments) {
+      return false;
+    }
+    for (var i = 0; i < object.attachments.length; ++i) {
+      if (object.attachments[i].objectType == "photo") {
+        return true;
+      }
+    }
+    return false;
   }
 
   function addProfilePhoto(photoUrl) {
