@@ -62,16 +62,17 @@
     font-size: 1.2em;
   }
 
-  #headWrap {
+  .headWrap {
     padding: 5px;
     margin: 10px;
     border: 1px solid black;
     display: block;
     float: left;
+    clear: left;
     box-shadow: 0px 0px 20px #008;
   }
 
-  #headWrap:hover {
+  #hw1:hover {
     color: #444;
     text-decoration: underline;
   }
@@ -81,8 +82,8 @@
   google.load("jquery", "1.7.0");
   google.load("jqueryui", "1.8.16");
 
-  userId = "115470071077898720170";
-  key = "<?php echo ($_GET['u']) ? ($_GET['u']) : "AIzaSyDWGHSeLL0NMLN-K5XvtEU58Vg56GanCT4" ?>";
+  userId = "<?php echo ($_GET['u']) ? ($_GET['u']) : "115470071077898720170" ?>";
+  key = "AIzaSyDWGHSeLL0NMLN-K5XvtEU58Vg56GanCT4";
 
   function onLoad() {
     jQuery.getJSON('https://www.googleapis.com/plus/v1/people/' + userId + '/activities/public?' +
@@ -193,8 +194,14 @@
 <link href='http://fonts.googleapis.com/css?family=Convergence' rel='stylesheet' type='text/css'>
 </head><body>
 <div id="header">
-  <div id="headWrap">
+  <div class="headWrap" id="hw1">
     <h1 id="head1">Showcase+</h1>
+  </div>
+  <div class="headWrap" id="hw2">
+    <form method="GET">
+      <input type="text" size=40 name="u" />
+      <input type="submit" />
+    </form>
   </div>
   <div align="center" id="photoContainer"></div>
 </div>
